@@ -41,7 +41,7 @@ class Stand {
 
   getProductByName(name) {
     return this.produceList.find(
-      (p) => p.name.tolowercase() === name.tolowercase()
+      (p) => p.name.toLowerCase() === name.toLowerCase()
     );
   }
 }
@@ -101,3 +101,38 @@ class FarmersMarket {
     });
   }
 }
+
+// ----- Usage Example -----
+
+const market = new FarmersMarket();
+
+const nancy = new Farmer("Nancy");
+const mauro = new Farmer("Mauro");
+
+const stand1 = market.createStand();
+const stand2 = market.createStand();
+
+stand1.assignFarmer(nancy);
+stand2.assignFarmer(mauro);
+
+stand1.addProduce(new Produce("Apples", 30));
+stand1.addProduce(new Produce("Carrots", 50));
+stand1.addProduce(new Produce("Squash", 20));
+stand2.addProduce(new Produce("Tomatoes", 40));
+stand2.addProduce(new Produce("Lettuce", 20));
+stand2.addProduce(new Produce("Peaches", 25));
+
+console.log("Initial Inventory:");
+market.listAllStands();
+
+console.log("\nSearching for 5 Apples, 10 Tomatoes, and 30 Peaches:");
+console.log(market.searchProduce("Apples"));
+console.log(market.searchProduce("Tomatoes"));
+console.log(market.searchProduce("Peaches"));
+
+market.buyProduce("Apples", 5);
+market.buyProduce("Tomatoes", 10);
+market.buyProduce("Peaches", 30);
+
+console.log("\nInventory After Purchase:");
+market.listAllStands();
